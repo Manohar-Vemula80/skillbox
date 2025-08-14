@@ -57,7 +57,7 @@ const Checkout = () => {
     console.log("✅ Payload sent to backend:", payload);
 
     try {
-      await axios.post('http://localhost:5000/api/order/checkout', payload);
+      await axios.post('https://skillbox-e0tj.onrender.com/api/order/checkout', payload);
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.error || 'Something went wrong during checkout.');

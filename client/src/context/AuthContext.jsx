@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const storedUser  = localStorage.getItem('user');
     const storedToken = localStorage.getItem('token');
-    console.log('[AuthContext] useEffect restoring from localStorage:', { storedUser, storedToken });
+    // console.log('[AuthContext] useEffect restoring from localStorage:', { storedUser, storedToken });
 
     if (storedUser && storedToken) {
       try {

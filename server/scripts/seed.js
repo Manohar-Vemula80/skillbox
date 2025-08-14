@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Course = require('../models/Course');
 
 const Reward = require('../models/reward');
-const Order = require('../models/order');    // Optional
+const Order = require('../models/Order');    // Optional
 const { info } = require('../data/info');    // Import the info array from your file
 
 // 🧠 Map local images to placeholder URLs or static references (MongoDB can’t store JS files or React images)
@@ -41,7 +41,7 @@ async function seedDatabase() {
       }))
     );
 
-    console.log(`🎁 Inserted ${rewardDocs.length} rewards`);
+    // console.log(`🎁 Inserted ${rewardDocs.length} rewards`);
 
     mongoose.disconnect();
     console.log('🔌 Disconnected from DB');

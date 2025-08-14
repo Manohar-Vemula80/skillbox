@@ -15,7 +15,7 @@ const Login = () => {
 
   const sendOtp = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/send-otp', { email });
+      const res = await axios.post('https://skillbox-e0tj.onrender.com/api/auth/send-otp', { email });
       setMessage(res.data.message);
       setOtpSent(true);
     } catch (err) {
@@ -25,7 +25,7 @@ const Login = () => {
 
   const verifyOtp = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/verify-otp', { email, otp });
+      const res = await axios.post('https://skillbox-e0tj.onrender.com/api/auth/verify-otp', { email, otp });
        console.log('[Login] verifyOtp response:', res.data);
 
        login(res.data.user, res.data.token); 

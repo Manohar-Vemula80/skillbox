@@ -24,7 +24,7 @@ const Profile = () => {
     setUser(storedUser);
 
     axios
-      .get(`http://localhost:5000/api/user/${storedUser._id}`, {
+      .get(`https://skillbox-e0tj.onrender.com/api/user/${storedUser._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

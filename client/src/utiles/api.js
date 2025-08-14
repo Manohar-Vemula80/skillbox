@@ -23,6 +23,6 @@
 import axios from 'axios';
 
 export const fetchCourses = async () => {
-  const res = await axios.get('http://localhost:5000/api/courses');
+  const res = await axios.get('https://skillbox-e0tj.onrender.com/api/courses');
   return res.data;
 };

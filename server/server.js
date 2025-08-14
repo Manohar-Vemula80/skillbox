@@ -27,8 +27,8 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URL)
-  .then(() => console.log('✅ MongoDB Connected'))
-  .catch((err) => console.log('❌ MongoDB Error:', err));
+  // .then(() => console.log('✅ MongoDB Connected'))
+  // .catch((err) => console.log('❌ MongoDB Error:', err));
 
 app.use('/api/auth',authRoutes);
 app.use('/api/courses',courseroutes );

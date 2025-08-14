@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 
-const BASE_URL = 'http://localhost:5000'; // ✅ change this to your backend URL if hosted
+const BASE_URL = 'https://skillbox-e0tj.onrender.com'; // ✅ change this to your backend URL if hosted
 
 const RewardStore = () => {
   const [userCoins, setUserCoins] = useState(0);

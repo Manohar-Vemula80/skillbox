@@ -25,7 +25,7 @@ const Register = () => {
 
   
   try {
-    const res = await axios.post('http://localhost:5000/api/auth/register', formData);
+    const res = await axios.post('https://skillbox-e0tj.onrender.com', formData);
     setMessage(res.data.message); // ✅ show backend response
   } catch (err) {
     setMessage(err.response?.data?.error || 'Registration failed');
