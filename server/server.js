@@ -9,36 +9,48 @@ const orderRoutes = require('./routes/order.route');
 const userRoutes = require('./routes/user.routes');
 const kitRoutes = require('./routes/Kit.route');
 const rewardRoutes = require('./routes/reward.route');
-// const cors = require('cors');
-// const orderRoutes = require('./routes/order.routes');
 
-// app.use(cors({
-//   origin: 'http://localhost:5173', // ✅ Frontend origin
-//   credentials: true               // ✅ Allow credentials (cookies, sessions)
-// }));
 dotenv.config();
 
 const app = express();
+
+// ✅ Allowed origins (both localhost & Vercel frontend)
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://skillbox-beta.vercel.app"
+];
+
 const corsOptions = {
-  origin: 'http://localhost:5173',
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like curl, mobile apps)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
 };
+
 app.use(cors(corsOptions));
 app.use(express.json());
 
+// ✅ MongoDB connection
 mongoose.connect(process.env.MONGO_URL)
   // .then(() => console.log('✅ MongoDB Connected'))
   // .catch((err) => console.log('❌ MongoDB Error:', err));
 
-app.use('/api/auth',authRoutes);
-app.use('/api/courses',courseroutes );
+// ✅ Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/courses', courseroutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/order', orderRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/enroll', require('./routes/enroll.route'));
 app.use('/api/kits', kitRoutes);
 app.use('/api/rewards', rewardRoutes);
-// app.use('/api/orders', orderRoutes);
 
+// ✅ Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
