@@ -14,16 +14,19 @@ dotenv.config();
 
 const app = express();
 
-// ✅ Allowed origins (both localhost & Vercel frontend)
+// ✅ Allowed origins (add all your frontend URLs here)
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://skillbox-beta.vercel.app"
+  "https://skillbox-beta.vercel.app",
+  "https://skillbox-six.vercel.app",
+  "https://skillbox-manohar-vemulas-projects.vercel.app"
 ];
 
 const corsOptions = {
   origin: function (origin, callback) {
-    // Allow requests with no origin (like curl, mobile apps)
+    // Allow requests with no origin (curl, Postman, mobile apps)
     if (!origin) return callback(null, true);
+
     if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -50,6 +53,11 @@ app.use('/api/user', userRoutes);
 app.use('/api/enroll', require('./routes/enroll.route'));
 app.use('/api/kits', kitRoutes);
 app.use('/api/rewards', rewardRoutes);
+
+// ✅ Health check route (for testing)
+app.get("/", (req, res) => {
+  res.send("✅ Backend is running...");
+});
 
 // ✅ Start server
 const PORT = process.env.PORT || 5000;
