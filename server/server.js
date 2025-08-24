@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
+
+// Routes
 const authRoutes = require('./routes/authRoutes');
 const courseroutes = require('./routes/Course.route');
 const cartRoutes = require('./routes/cart.routes');
@@ -16,8 +18,9 @@ const app = express();
 
 // ✅ Allowed frontend URLs
 const allowedOrigins = [
-  "http://localhost:5173",            // local dev (Vite)
-  "https://skillbox-kqzm.vercel.app"  // deployed frontend (Vercel)
+  "http://localhost:5173",              // local dev (Vite)
+  "https://skillbox-kqzm.vercel.app",  // deployed frontend (Vercel)
+  "https://skillbox-ivory.vercel.app"  // add more if needed
 ];
 
 // ✅ Proper CORS options
@@ -27,6 +30,7 @@ const corsOptions = {
     if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.error("❌ CORS blocked for origin:", origin);
       callback(new Error("Not allowed by CORS"));
     }
   },
@@ -39,8 +43,8 @@ app.use(express.json());
 
 // ✅ MongoDB connection
 mongoose.connect(process.env.MONGO_URL)
-  // .then(() => console.log('✅ MongoDB Connected'))
-  // .catch((err) => console.log('❌ MongoDB Error:', err));
+  .then(() => console.log('✅ MongoDB Connected'))
+  .catch((err) => console.log('❌ MongoDB Error:', err));
 
 // ✅ Routes
 app.use('/api/auth', authRoutes);
